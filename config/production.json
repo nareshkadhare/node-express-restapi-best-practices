@@ -1,0 +1,11 @@
+{
+    "dbConfig": {
+        "host": "<production-host>",
+        "user": "<production-user>",
+        "password": "<production-password>",
+        "database": "<production-database-name>",
+        "waitForConnections": true,
+        "connectionLimit": 10,
+        "queueLimit": 0
+    }
+}
