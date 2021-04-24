@@ -37,7 +37,14 @@ $ mysql >  CREATE TABLE `student` (
 ```
 
 ## Run Application
+Run below command in root directory of project
+
 ```bash
 $ npm start
 ```
 
+## OR
+
+```bash
+$ node app.js
+```
