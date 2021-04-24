@@ -1,24 +1,24 @@
 require('dotenv').config()
 const express = require('express');
 const routes = require('./routes/routes');
-const { ValidationError } = require('express-validation');
+const requestLogger = require('./middlewares/request.logger');
+const requestValidator = require('./middlewares/request.validator');
 
 //Create Express Application
 const app = express();
 
 //Use Json middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+//Use Request Logger
+app.use("/*",requestLogger);
 
 //Create api end point
 app.use('/api', routes);
 
-app.use(function (err, req, res, next) {
-    if (err) {
-        if (err instanceof ValidationError) return res.status(err.statusCode).json(err)
-        return res.status(500).json(err)
-    }
-    next();
-})
+//Request Validator Middleware
+app.use(requestValidator);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
